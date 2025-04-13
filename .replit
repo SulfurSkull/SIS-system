@@ -1,0 +1,51 @@
+modules = ["cpp"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "CompileAndRunCpp"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "student_management_system"
+
+[[workflows.workflow]]
+name = "CompileAndRunCpp"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "g++ -o student_system main.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp -std=c++11 && ./student_system"
+
+[[workflows.workflow]]
+name = "student_management_system"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "g++ -o student_system main.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp && ./student_system"
+
+[deployment]
+run = ["sh", "-c", "g++ -o student_system main.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp -std=c++11 && ./student_system"]
