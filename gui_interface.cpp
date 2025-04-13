@@ -93,26 +93,27 @@ void initializeGUI() {
 
 // Display header
 void displayHeader() {
+    // Fill header area with color
     attron(COLOR_PAIR(COLOR_HEADER) | A_BOLD);
-    move(0, 0);
-    for (int i = 0; i < termWidth; i++) {
-        addch(' ');
+    for (int row = 0; row < 2; row++) {
+        move(row, 0);
+        for (int i = 0; i < termWidth; i++) {
+            addch(' ');
+        }
     }
-    centerText(0, "STUDENT INFORMATION SYSTEM", termWidth);
-    move(1, 0);
-    for (int i = 0; i < termWidth; i++) {
-        addch(' ');
-    }
+    
+    // Display title
+    std::string title = "STUDENT INFORMATION SYSTEM";
+    int centerX = (termWidth - title.length()) / 2;
+    mvprintw(0, centerX, "%s", title.c_str());
     
     // Display date in top right corner
     time_t now = time(0);
     struct tm* ltm = localtime(&now);
-    std::stringstream dateStream;
-    dateStream << std::setfill('0') << std::setw(2) << 1 + ltm->tm_mon << "/"
-               << std::setfill('0') << std::setw(2) << ltm->tm_mday << "/"
-               << 1900 + ltm->tm_year;
-    std::string dateStr = dateStream.str();
-    mvprintw(0, termWidth - 10, "%s", dateStr.c_str());
+    char dateBuffer[12];
+    sprintf(dateBuffer, "%02d/%02d/%04d", 
+            1 + ltm->tm_mon, ltm->tm_mday, 1900 + ltm->tm_year);
+    mvprintw(0, termWidth - 12, "%s", dateBuffer);
     
     attroff(COLOR_PAIR(COLOR_HEADER) | A_BOLD);
     refresh();
@@ -222,29 +223,51 @@ int getNumericInput(int y, int x, int maxWidth) {
 
 // Display Main Menu
 void displayMainMenu() {
+    // Clear and draw the menu window with a border
     werase(menuwin);
     wattron(menuwin, COLOR_PAIR(COLOR_MENU));
+    
+    // Draw a fancy box border
     box(menuwin, 0, 0);
     
-    // Menu title
+    // Add decorative corners
+    mvwaddch(menuwin, 0, 0, ACS_ULCORNER);
+    mvwaddch(menuwin, 0, menuWidth - 1, ACS_URCORNER);
+    mvwaddch(menuwin, menuHeight - 1, 0, ACS_LLCORNER);
+    mvwaddch(menuwin, menuHeight - 1, menuWidth - 1, ACS_LRCORNER);
+    
+    // Menu title with decoration
     wattron(menuwin, A_BOLD);
-    mvwprintw(menuwin, 1, (menuWidth - 9) / 2, "MAIN MENU");
+    mvwhline(menuwin, 2, 1, ACS_HLINE, menuWidth - 2); // Line under title
+    
+    std::string title = " MAIN MENU ";
+    mvwprintw(menuwin, 1, (menuWidth - title.length()) / 2, "%s", title.c_str());
     wattroff(menuwin, A_BOLD);
     
-    // Menu items
-    mvwprintw(menuwin, 3, 3, "1. Add Student");
-    mvwprintw(menuwin, 4, 3, "2. Delete Student");
-    mvwprintw(menuwin, 5, 3, "3. Modify Student");
-    mvwprintw(menuwin, 6, 3, "4. Search Student");
-    mvwprintw(menuwin, 7, 3, "5. Display Students (By ID)");
-    mvwprintw(menuwin, 8, 3, "6. Display Students (By Name)");
-    mvwprintw(menuwin, 9, 3, "7. Manage Courses");
-    mvwprintw(menuwin, 10, 3, "8. Compute GPA");
-    mvwprintw(menuwin, 11, 3, "9. Update Study Plan");
-    mvwprintw(menuwin, 12, 3, "0. Exit");
+    // Menu items with improved formatting
+    const int startRow = 4;
+    const int indent = 5;
     
-    // Prompt
-    mvwprintw(menuwin, menuHeight - 2, 3, "Enter your choice: ");
+    mvwprintw(menuwin, startRow + 0, indent, "1. Add Student");
+    mvwprintw(menuwin, startRow + 1, indent, "2. Delete Student");
+    mvwprintw(menuwin, startRow + 2, indent, "3. Modify Student");
+    mvwprintw(menuwin, startRow + 3, indent, "4. Search Student");
+    mvwprintw(menuwin, startRow + 4, indent, "5. Display Students (By ID)");
+    mvwprintw(menuwin, startRow + 5, indent, "6. Display Students (By Name)");
+    mvwprintw(menuwin, startRow + 6, indent, "7. Manage Courses");
+    mvwprintw(menuwin, startRow + 7, indent, "8. Compute GPA");
+    mvwprintw(menuwin, startRow + 8, indent, "9. Update Study Plan");
+    mvwprintw(menuwin, startRow + 9, indent, "0. Exit");
+    
+    // Separator line above prompt
+    mvwhline(menuwin, menuHeight - 3, 1, ACS_HLINE, menuWidth - 2);
+    
+    // Prompt with highlighted background
+    wattron(menuwin, COLOR_PAIR(COLOR_HIGHLIGHT));
+    mvwprintw(menuwin, menuHeight - 2, 3, " Enter your choice: ");
+    wattroff(menuwin, COLOR_PAIR(COLOR_HIGHLIGHT));
+    
+    // Finish drawing
     wattroff(menuwin, COLOR_PAIR(COLOR_MENU));
     wrefresh(menuwin);
 }
