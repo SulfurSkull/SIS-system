@@ -44,4 +44,5 @@ int findStudentById(int id);
 bool validateNationalId(const string& nationalId);
 void sortStudentsById();
 void sortStudentsByName();
+float convertGradeTo4Scale(float numericGrade);
 #endif

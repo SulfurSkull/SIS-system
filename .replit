@@ -19,6 +19,14 @@ args = "CompileAndRunCpp"
 task = "workflow.run"
 args = "student_management_system"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "StudentSystemGUI"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "RunStudentSystemGUI"
+
 [[workflows.workflow]]
 name = "CompileAndRunCpp"
 author = "agent"
@@ -46,6 +54,34 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "g++ -o student_system main.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp && ./student_system"
+
+[[workflows.workflow]]
+name = "StudentSystemGUI"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "g++ -o student_system_gui main_gui.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp gui_interface.cpp -lncurses"
+
+[[workflows.workflow]]
+name = "RunStudentSystemGUI"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./student_system_gui"
 
 [deployment]
 run = ["sh", "-c", "g++ -o student_system main.cpp file_operations.cpp gpa_calculation.cpp sorting.cpp student_operations.cpp -std=c++11 && ./student_system"]

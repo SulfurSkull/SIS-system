@@ -1,6 +1,7 @@
 #include "student.h"
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 
 int findStudentById(int id) {
     for(int i = 0; i < numStudents; i++) {
@@ -127,7 +128,7 @@ void searchStudent() {
             cout << "ID: " << students[index].id << "\nName: " << students[index].name 
                  << "\nNational ID: " << students[index].nationalId 
                  << "\nNumber of Courses: " << students[index].numCourses
-                 << "\nGPA: " << students[index].gpa << "\n";
+                 << "\nGPA: " << fixed << setprecision(2) << students[index].gpa << " / 4.00\n";
         } else {
             cout << "Student not found!\n";
         }
@@ -148,7 +149,7 @@ void searchStudent() {
                 cout << "ID: " << students[i].id << "\nName: " << students[i].name 
                      << "\nNational ID: " << students[i].nationalId 
                      << "\nNumber of Courses: " << students[i].numCourses
-                     << "\nGPA: " << students[i].gpa << "\n\n";
+                     << "\nGPA: " << fixed << setprecision(2) << students[i].gpa << " / 4.00\n\n";
                 found = true;
             }
         }
@@ -195,7 +196,7 @@ void displayStudents(bool sortedById) {
             cout << tempStudents[i].name << "\t";
             
         cout << tempStudents[i].nationalId << "\t"
-             << tempStudents[i].gpa << "\n";
+             << fixed << setprecision(2) << tempStudents[i].gpa << "\n";
     }
     cout << "----------------------------------------\n";
     cout << "Total students: " << numStudents << "\n";
@@ -269,15 +270,16 @@ void manageCourses(int index) {
                 }
                 
                 cout << "\nCourses for " << s.name << ":\n";
-                cout << "------------------------\n";
-                cout << "No.\tCourse Name\tGrade\n";
-                cout << "------------------------\n";
+                cout << "--------------------------------------\n";
+                cout << "No.\tCourse Name\tGrade\tGPA Scale\n";
+                cout << "--------------------------------------\n";
                 for(int i = 0; i < s.numCourses; i++) {
                     cout << i+1 << ".\t" << s.courses[i].name << "\t\t" 
-                         << s.courses[i].grade << "\n";
+                         << s.courses[i].grade << "\t"
+                         << fixed << setprecision(2) << convertGradeTo4Scale(s.courses[i].grade) << "\n";
                 }
-                cout << "------------------------\n";
-                cout << "GPA: " << s.gpa << "\n";
+                cout << "--------------------------------------\n";
+                cout << "Cumulative GPA: " << fixed << setprecision(2) << s.gpa << " / 4.00\n";
                 break;
                 
             case 4:
