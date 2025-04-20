@@ -1,39 +1,48 @@
-#include "student.h"
-#include <ncurses.h>
-#include <menu.h>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <iomanip>
-#include <cstring>
-#include <ctime>
-#include <algorithm>
-#include <functional>
+/**
+ * GUI Interface for Student Information System
+ * Author: SulfurSkull
+ * Date: April 20, 2025
+ * 
+ * This file contains the implementation of the ncurses-based
+ * graphical user interface for the Student Information System.
+ */
+
+#include "student.h"   // Include student structure definitions
+#include <ncurses.h>   // Include ncurses library for terminal UI
+#include <menu.h>      // Include menu library for ncurses menus
+#include <string>      // Include string library for string manipulation
+#include <vector>      // Include vector for dynamic arrays
+#include <sstream>     // Include string stream for string formatting
+#include <iomanip>     // Include for input/output manipulators
+#include <cstring>     // Include for C-style string functions
+#include <ctime>       // Include for date and time functions
+#include <algorithm>   // Include for sorting algorithms
+#include <functional>  // Include for function objects
 
 // Define global variables
-Student students[MAX_STUDENTS];
-int numStudents = 0;
+Student students[MAX_STUDENTS];  // Array to store student data
+int numStudents = 0;             // Counter for number of students
 
-// Forward declarations
-void initializeGUI();
-void displayMainMenu();
-void processMainMenu();
-void displayStudentList(bool sortedById);
-void addStudentForm();
-void deleteStudentForm();
-void searchStudentForm();
-void modifyStudentForm();
-void manageCourseMenu();
-void computeGPAForm();
-void updateStudyPlanForm();
-void handleStudentListing(bool sortedById);
-void cleanupGUI();
-void showMessage(const std::string& message);
-void displayFormField(int y, int x, const std::string& label, char* buffer, int bufSize, bool isNumeric = false);
-void centerText(int y, const std::string& text, int width);
-int getNumericInput(int y, int x, int maxWidth);
-void displayHeader();
-void drawBox(int startY, int startX, int height, int width);
+// Forward declarations of functions
+void initializeGUI();            // Initialize the ncurses GUI
+void displayMainMenu();          // Display the main menu
+void processMainMenu();          // Process main menu selection
+void displayStudentList(bool sortedById);  // Display list of students
+void addStudentForm();           // Form to add a new student
+void deleteStudentForm();        // Form to delete a student
+void searchStudentForm();        // Form to search for a student
+void modifyStudentForm();        // Form to modify student data
+void manageCourseMenu();         // Menu for course management
+void computeGPAForm();           // Form to compute GPA
+void updateStudyPlanForm();      // Form to update study plan
+void handleStudentListing(bool sortedById);  // Handle student listing
+void cleanupGUI();               // Clean up GUI resources
+void showMessage(const std::string& message);  // Show a message to the user
+void displayFormField(int y, int x, const std::string& label, char* buffer, int bufSize, bool isNumeric = false);  // Display a form field
+void centerText(int y, const std::string& text, int width);  // Center text on screen
+int getNumericInput(int y, int x, int maxWidth);  // Get numeric input from user
+void displayHeader();            // Display header with title and date
+void drawBox(int startY, int startX, int height, int width);  // Draw a box around an area
 
 // Global variables for ncurses
 WINDOW* mainwin;
