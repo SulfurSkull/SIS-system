@@ -1,7 +1,5 @@
 /**
  * Student Information System - Console Version
- * Author: SulfurSkull
- * Date: April 13, 2025
  */
 
 #include "student.h"    // Include the student header file that contains declarations

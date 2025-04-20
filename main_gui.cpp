@@ -1,7 +1,5 @@
 /**
  * Student Information System - GUI Version
- * Author: SulfurSkull
- * Date: April 20, 2025
  */
 
 #include "student.h"    // Include the student header file with structure definitions

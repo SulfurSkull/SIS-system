@@ -1,7 +1,5 @@
 /**
  * GPA Calculation Module
- * Author: SulfurSkull
- * Date: April 20, 2025
  * 
  * This file contains functions for calculating student GPA
  * using the standard 4.0 scale.

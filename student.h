@@ -1,7 +1,5 @@
 /**
  * student.h - Header file for Student Information System
- * Author: SulfurSkull
- * Date: April 20, 2025
  * 
  * This file contains the data structures and function declarations
  * for the Student Information System.

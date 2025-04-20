@@ -1,7 +1,5 @@
 /**
  * GUI Interface for Student Information System
- * Author: SulfurSkull
- * Date: April 20, 2025
  * 
  * This file contains the implementation of the ncurses-based
  * graphical user interface for the Student Information System.

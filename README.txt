@@ -1,8 +1,6 @@
 ========================================================
 STUDENT INFORMATION SYSTEM
 Version 1.0
-Author: SulfurSkull
-Date: April 20, 2025
 ========================================================
 
 OVERVIEW
