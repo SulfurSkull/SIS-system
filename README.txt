@@ -2,7 +2,7 @@
 STUDENT INFORMATION SYSTEM
 Version 1.0
 Author: SulfurSkull
-Date: April 20, 2025 {Date it was pushed to Github}
+Date: April 20, 2025
 ========================================================
 
 OVERVIEW
@@ -93,3 +93,12 @@ TROUBLESHOOTING
    $ sudo yum install ncurses-devel (CentOS/RHEL)
 
 3. If the GUI display appears corrupted, try resizing your terminal window.
+
+CONTACT
+-------
+For questions, suggestions, or bug reports, please contact:
+Email: contact@sulfurskull.com
+
+========================================================
+© 2025 SulfurSkull. All Rights Reserved.
+========================================================
