@@ -1,0 +1,26 @@
+// This file shows the format of the students.txt data file with comments
+// Each line represents one student record with the following comma-separated format:
+
+// Format explanation:
+// [Student ID],[Name],[National ID],[Number of Courses],[Course1 Name]:[Course1 Grade],[Course2 Name]:[Course2 Grade],...,[GPA],[Number of Study Plan Items],[Study Plan Item1],[Study Plan Item2],...
+
+// Example 1: Student with ID 101, one course, and one study plan item
+101,John Smith,12345678901234,1,Mathematics:85,3.00,1,Database Systems
+
+// Example 2: Student with ID 102, two courses, and two study plan items
+// 102,Jane Doe,98765432109876,2,Physics:90,Chemistry:88,3.33,2,Advanced Calculus,Machine Learning
+
+// Example 3: Student with ID 103, no courses, and no study plan items
+// 103,Alex Johnson,12345698765432,0,0.00,0,
+
+// Field Details:
+// 1. Student ID: Unique integer identifier
+// 2. Name: Full name of the student
+// 3. National ID: 14-digit identification number
+// 4. Number of Courses: Integer count of courses
+// 5. Course Details: Format is [CourseName]:[Grade] for each course
+//    - Multiple courses are separated by commas
+// 6. GPA: Grade Point Average on 4.0 scale
+// 7. Number of Study Plan Items: Integer count of study plan entries
+// 8. Study Plan Items: Course names for future enrollment
+//    - Multiple items are separated by commas
